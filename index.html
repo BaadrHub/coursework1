@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="Javascript/lessons.js"></script>
+    <title>Coursework 1</title>
+  </head>
+
+  <header>
+
+   <h1>Welcome! Pick a Course and Purchase!</h1>
+  
+  </header>
+
+  <body>
+
+    
+    <!--link element-->
+    <div id="app">  
+      
+        <div>
+        <button id="buttonascending" type="button" v-on:click="Ascending">Sort Price Ascending</button>
+        </div>
+
+        <div>
+        <button id="buttondecending" type="button" v-on:click="Decending">Sort Price Decending</button>
+        </div>
+      
+        <div id="attributescolour" v-for="(lesson, counter) in lessons" :key="counter">
+        
+        <p>Subject: {{lesson.subject}}</p>   <!--Display Subject Array-->
+        <p>location: {{lesson.location}}</p> <!--Display Location Array-->
+        <p>price: {{lesson.price}}</p>       <!--Display Price Array-->
+        <p>space: {{lesson.space}}</p>       <!--Display Space Array-->
+        
+        <img :src="lesson.image" :alt="lesson.subject" height= "200px" width="200px"/>  <!--Render Image Element-->
+
+        <button id="cart" type="button" v-on:click="addtocart">Add To Basket</button>
+                
+        
+
+        <button id="addtocart" v-if="lesson.space > 0" type="button" v-on:click="decrease(counter)"> Add to Cart </button>
+             <!--V-if to conditionally render a block--> <!--v-on to run code when user clicks button-->
+
+          
+
+      </div>
+
+      
+
+     
+
+
+
+
+
+      </div>
+
+      
+    </div>
+
+    <script>
+      //Create Vue Object
+      new Vue({
+        el: "#app",
+        data: {
+          lessons
+        },
+        methods: {     
+          decrease(counter) { //method to decrease the counter
+
+            if (this.lessons[counter].space > 0) //If Counter Greater Than 0
+             this.lessons[counter].space--;      //Decrement Counter **Counter Cannot Be Decremented After it Reaches 0**
+             
+
+          },
+
+          Ascending() { //method to sort ascending
+            
+            this.lessons.sort(function(a, b) {  //a-b to compare all elements originally did Science, Geography didn't work for whole array <<note for later
+
+              return a.price - b.price    //.price to access property of the object in array
+            }) //close lessons sort function
+          
+          },// close sort function
+
+          Decending() { //method to sort decending
+
+            this.lessons.sort (function(a,b) {
+
+             return b.price - a.price
+             
+          }) //close this.lessons.sort function
+        
+       }, //close ascending function
+
+
+
+}      
+});
+
+</script>
+    <style scoped>
+      header {
+        background-color: rgb(124, 171, 5);
+        padding: 1px;
+        color: rgb(29, 0, 247);
+        text-align: center;
+        height: 100px;
+        }
+  
+   #buttonascending {
+
+     color: rgb(255, 255, 255);
+     background-color: rgb(49, 113, 242);
+   }
+
+   #buttondecending {
+
+    color: rgb(255, 255, 255);
+     background-color: rgb(49, 113, 242);
+}
+#addtocart {
+
+  color: rgb(255, 255, 255);
+     background-color: rgb(49, 113, 242);
+}
+
+#attributescolour {
+
+color: rgb(0, 1, 11);
+
+}
+
+#shoppingcartbutton{
+
+  color: rgb(255, 255, 255);
+     background-color: rgb(49, 113, 242);
+}
+
+   
+
+
+
+         
+
+          
+        
+    </style>
+
+  </body>
+
+
+</html>
+</html>
